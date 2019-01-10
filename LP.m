@@ -1,14 +1,15 @@
 clc,clear
-a=0;
+k=0;
 hold on
 while a<0.05
-    c=[0.05,0.245,0.225,0.23,0.155];
-    A=[zeros(4,1),diag([0.015,0.025,0.035,0.026])];
+    c=[0,0.024,0.016,0.045,0.026];
+    A=diag([-0.05,-0.255,-0.21,-0.195,-0.18]);
     b=a*ones(4,1);
-    Aeq=[1,1.035,1.045,1.02,1.055];
+    Aeq=[1,1.015,1.02,1.055,1.06];
     beq=1;
     LB=zeros(5,1);
-    [x,Q]=linprog(-c,A,b,Aeq,beq,LB);
+    %[x,Q]=linprog(-c,A,b,Aeq,beq,LB);
+    x = fminimax(fun,x0,A,b,Aeq,beq,lb,ub);
     Q=-Q;
     plot(a,Q,'*k');
     a = a + 0.001;
